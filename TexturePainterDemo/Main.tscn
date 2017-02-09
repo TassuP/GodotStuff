@@ -94,6 +94,27 @@ textures/shade_param_tc = 0
 
 [node name="Main" type="Node"]
 
+[node name="SizeSlider" type="HSlider" parent="."]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 9.0
+margin/top = 142.0
+margin/right = 87.0
+margin/bottom = 158.0
+range/min = 1.0
+range/max = 5.0
+range/step = 1.0
+range/page = 0.0
+range/value = 3.0
+range/exp_edit = false
+range/rounded = true
+tick_count = 0
+ticks_on_borders = true
+focus_mode = 2
+
 [node name="ClearButton" type="Button" parent="."]
 
 focus/ignore_mouse = false
@@ -114,15 +135,16 @@ flat = false
 
 anchor/top = 1
 anchor/bottom = 1
+rect/scale = Vector2( 0.85, 0.85 )
 focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 0
-margin/left = 7.0
-margin/top = 210.0
-margin/right = 356.0
-margin/bottom = 20.0
-text = "Texture Painter Demo\nby Tapio Pyrhönen\n\nInstructions:\nChoose a color using the above color picker and paint the monkey with left mouse button. Rotate monkey with right mouse button. The Clear button fills the whole texture with the chosen color.\n\nHint: Painting with different alpha values is pretty cool."
+margin/left = 12.0
+margin/top = 225.0
+margin/right = 311.0
+margin/bottom = -30.0
+text = "Texture Painter Demo\nby Tapio Pyrhönen\n\nInstructions:\nChoose a color using the above color picker , set brush size using the slider and paint the model with left mouse button.\n\nRotate the model with right mouse button. The Clear button fills the whole texture with the chosen color.\n\nHint: Painting with different alpha values is pretty cool."
 autowrap = true
 percent_visible = 1.0
 lines_skipped = 0
@@ -223,7 +245,7 @@ _update_shape_index = 0
 [node name="DirectionalLight" type="DirectionalLight" parent="Spatial"]
 
 _import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
-transform/local = Transform( 0.81332, 0.570233, -0.115519, -0.527254, 0.806321, 0.26805, 0.245997, -0.157103, 0.956455, 11.0167, 3.88824, 3.82225 )
+transform/local = Transform( 0.816464, 0.393379, 0.422659, -0.527254, 0.806321, 0.26805, -0.235352, -0.441701, 0.865743, 11.0167, 3.88824, 3.82225 )
 layers = 1
 params/enabled = true
 params/editor_only = false
@@ -243,6 +265,8 @@ shadow/mode = 0
 shadow/max_distance = 0.0
 shadow/split_weight = 0.5
 shadow/zoffset_scale = 2.0
+
+[connection signal="value_changed" from="SizeSlider" to="Spatial/StaticBody/MeshInstance" method="_on_change_brushsize"]
 
 [connection signal="button_down" from="ClearButton" to="Spatial/StaticBody/MeshInstance" method="_on_ClearButton_button_down"]
 
