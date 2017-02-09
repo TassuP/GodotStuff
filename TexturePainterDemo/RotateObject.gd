@@ -1,5 +1,7 @@
 extends StaticBody
 
+# This script rotates the object when dragging with right mouse button
+
 var pressed = false
 var xy_spd = 0.0002
 var z_spd = 0.0001

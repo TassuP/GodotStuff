@@ -2,14 +2,16 @@ extends Spatial
 
 const ray_length = 100
 var col = Color(1,1,1,1)
+
 func _ready():
 	set_process(true)
-
 
 func _process(delta):
 	if(Input.is_mouse_button_pressed(BUTTON_MASK_LEFT)):
 		shoot(col)
 
+func _on_color_changed( color ):
+	col = color
 
 func shoot(var color):
 	var camera = get_node("Camera")
@@ -37,11 +39,13 @@ func shoot(var color):
 			
 			# skip backfaces
 			var n = mdt.get_face_normal(i)
-			n = object.get_transform().xform(n)
-			
+			n = object.get_transform().xform(n)			
 			var d = n.dot(camera.get_transform().basis.z)
 			
 			if(d>0):
+				
+				# Next we need to convert the triangle to screenspace, so we can
+				# check if mouse position is inside the triangle.
 				
 				# indices of the verts
 				var i0 = mdt.get_face_vertex(i,0)
@@ -77,19 +81,25 @@ func shoot(var color):
 				# Check if point is in triangle
 				if((u >= 0) && (v >= 0) && (u + v < 1)):
 					
-					# perform the same weird math for the UV but inverted
+					# Mouse is inside this triange. Now figure out the
+					# exact pixel (texel) on the texture
+					
+					# Get the vertices UV
 					var a = mdt.get_vertex_uv(i0)
 					var b = mdt.get_vertex_uv(i1)
 					var c = mdt.get_vertex_uv(i2)
-					var P = a + u * (c - a) + v * (b - a)
+					
+					# perform the same weird math for the UV but inverted
+					var p = a + u * (c - a) + v * (b - a)
+					# I guess that interpolates between the 3 verts UV's
+					# to calculate UV for the point inside the triangle
 					
 					# finally draw the pixel
-					meshinst.plot_px(P.x,P.y,color)
+					meshinst.plot_px(p.x,p.y,color)
 				
-			i+=1
+			i+=1 # move on to next triangle
 		
 		
 
-func _on_ColorPickerButton_color_changed( color ):
-	col = color
+
 
