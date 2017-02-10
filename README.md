@@ -1,8 +1,6 @@
 # TassuP's Godot stuff
 
-This repository is for some little things I've made with [Godot engine](https://godotengine.org). There is only one demo for now, but I will add more stuff when I come up with something usefull or fun.
-
-Everything here is released under MIT-license.
+This repository is for some little things I've made with [Godot engine](https://godotengine.org). Everything here is released under MIT-license, so you can use them in any way you like. No need to give me credit.
 
 ## Delaunay Triangulator
 A basic 2D Delaunay triangulation demo for Godot. This demo just creates a MeshInstance from random points, but the algorithm can be used for generating terrain heightmaps, convex hulls, navmeshes, vectorizing bitmaps, caves in a roguelike, etc.
