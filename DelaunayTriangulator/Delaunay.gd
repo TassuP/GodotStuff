@@ -33,6 +33,14 @@ var tris = []
 # how long does triangulation take
 var generation_time = 0.0
 
+# Controls
+func _on_Wireframe_CheckBox_toggled( pressed ):
+	wireframe = pressed
+func _on_SmoothShading_CheckBox_toggled( pressed ):
+	smooth_shading = pressed
+func _on_RandomHeight_CheckBox_toggled( pressed ):
+	random_h = pressed
+	points.clear()
 
 func update_counters():
 	var s = "Verts: " + str(verts.size())
@@ -40,7 +48,8 @@ func update_counters():
 	s += "\n\nFPS: " + str(OS.get_frames_per_second())
 	s += "\nmsec: " + str(generation_time)
 	get_node("/root/Main/Counters").set_text(s)
-	
+
+
 func _ready():
 	if(demo_mode):
 		set_process(true)
@@ -52,7 +61,7 @@ func _process(delta):
 	if(t >= 0.2): # 5 points / second
 		t=0
 		
-		# randomize z-values just for fun
+		# randomize height-values just for fun
 		var r = 0.0
 		if(random_h):
 			r = randf()*10
@@ -95,9 +104,10 @@ func Triangulate():
 	tris.clear()
 	
 	# Create vertices and uv
-	for v in points:
-#		uv.append(Vector2(v.x/100+0.5, v.z/100+0.5))
-		verts.append(Vector3(v.x, v.y, v.z))
+	var i = 0
+	while(i<points.size()):
+		verts.append(Vector3(points[i].x, points[i].y, points[i].z))
+		i+=1
 	
 	# Create triangle indices
 	tris = TriangulatePolygon(verts)
@@ -118,29 +128,32 @@ func CreateSurface():
 		surfTool.add_smooth_group(true)
 	
 	# Add vertices and UV to SurfaceTool
-	for v in verts:
-		surfTool.add_vertex(v)
+	var i = 0
+	while(i < verts.size()):
 		if(horizontal):
-			surfTool.add_uv(Vector2(v.x/100+0.5,v.z/100+0.5))
+			surfTool.add_uv(Vector2(verts[i].x/100+0.5,verts[i].z/100+0.5))
 		else:
-			surfTool.add_uv(Vector2(v.x/100+0.5,-v.y/100+0.5))
+			surfTool.add_uv(Vector2(verts[i].x/100+0.5,-verts[i].y/100+0.5))
+		surfTool.add_vertex(verts[i])
+		i += 1
 	
 	# Add indices to SurfaceTool
-	for t in tris:
+	i = 0
+	while(i < tris.size()):
 		if(wireframe):
-			surfTool.add_index(t.p1)
-			surfTool.add_index(t.p2)
+			surfTool.add_index(tris[i].p1)
+			surfTool.add_index(tris[i].p2)
 			
-			surfTool.add_index(t.p2)
-			surfTool.add_index(t.p3)
+			surfTool.add_index(tris[i].p2)
+			surfTool.add_index(tris[i].p3)
 			
-			surfTool.add_index(t.p3)
-			surfTool.add_index(t.p1)
+			surfTool.add_index(tris[i].p3)
+			surfTool.add_index(tris[i].p1)
 		else:
-			surfTool.add_index(t.p1)
-			surfTool.add_index(t.p2)
-			surfTool.add_index(t.p3)
-	
+			surfTool.add_index(tris[i].p1)
+			surfTool.add_index(tris[i].p2)
+			surfTool.add_index(tris[i].p3)
+		i += 1
 	return surfTool
 	
 
@@ -160,7 +173,7 @@ func CreateMesh():
 	return mesh
 
 
-
+#################  The rest is the delaunay-code #################
 
 # classes for delaunay
 class Triangle:
@@ -188,11 +201,14 @@ func TriangulatePolygon(XZofVertices):
 	var xmax = xmin
 	var ymax = ymin
 	
-	for v in XZofVertices:
+	var i = 0
+	while(i < XZofVertices.size()):
+		var v = XZofVertices[i]
 		xmin = min(xmin, v.x)
 		ymin = min(ymin, v.y)
 		xmax = max(xmax, v.x)
 		ymax = max(ymax, v.y)
+		i += 1
 	
 	var dx = xmax - xmin
 	var dy = ymax - ymin
@@ -201,11 +217,14 @@ func TriangulatePolygon(XZofVertices):
 	var ymid = (ymax + ymin) * 0.5
 	
 	var ExpandedXZ = Array()
-	for v in XZofVertices:
+	i = 0
+	while(i < XZofVertices.size()):
+		var v = XZofVertices[i]
 		if(horizontal):
 			ExpandedXZ.append(Vector3(v.x, -v.z, v.y))
 		else:
 			ExpandedXZ.append(Vector3(v.x, v.y, v.z))
+		i += 1
 	
 	ExpandedXZ.append(Vector2((xmid - 2 * dmax), (ymid - dmax)))
 	ExpandedXZ.append(Vector2(xmid, (ymid + 2 * dmax)))
@@ -213,7 +232,8 @@ func TriangulatePolygon(XZofVertices):
 	
 	var TriangleList = Array()
 	TriangleList.append(Triangle.new(VertexCount, VertexCount + 1, VertexCount + 2));
-	for ii1 in range(0,VertexCount):
+	var ii1 = 0
+	while(ii1 < VertexCount):
 		var Edges = Array()
 		var ii2 = 0
 		while(ii2 < TriangleList.size()):
@@ -241,6 +261,7 @@ func TriangulatePolygon(XZofVertices):
 			TriangleList.append(Triangle.new(Edges[ii2].p1, Edges[ii2].p2, ii1))
 			ii2+=1
 		Edges.clear()
+		ii1 += 1
 		
 	var ii1 = TriangleList.size()-1
 	while(ii1 >= 0):

@@ -173,7 +173,7 @@ demo_mode = true
 horizontal = true
 wireframe = true
 smooth_shading = false
-random_h = true
+random_h = false
 
 [node name="Wireframe CheckBox" type="CheckBox" parent="."]
 
@@ -231,6 +231,6 @@ align = 0
 
 [connection signal="toggled" from="SmoothShading CheckBox" to="Spatial/Rotator/Delaunay" method="_on_SmoothShading_CheckBox_toggled"]
 
-[connection signal="toggled" from="RandomHeight CheckBox" to="Spatial/Rotator/Delaunay" method="_on_RandomZ_CheckBox_toggled"]
+[connection signal="toggled" from="RandomHeight CheckBox" to="Spatial/Rotator/Delaunay" method="_on_RandomHeight_CheckBox_toggled"]
 
 
