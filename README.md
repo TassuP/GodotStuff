@@ -2,6 +2,11 @@
 
 This repository is for some little things I've made with [Godot engine](https://godotengine.org). Everything here is released under MIT-license, so you can use them in any way you like. No need to give me credit.
 
+## Simplex noise module
+A custom c++ module for a Simplex noise function. This only works for Godot 3.0, but can be used with 2.x with very small changes. Only 2D-version for now, since that's apparently not protected by patents. This module reduces 91% of the computing time compared to GDScript implementation.
+* Original GDScript version by OvermindDL1: https://github.com/OvermindDL1/Godot-Helpers/tree/master/Simplex
+* More info: https://en.wikipedia.org/wiki/Simplex_noise
+
 ## Delaunay Triangulator
 A basic 2D Delaunay triangulation demo for Godot. This demo just creates a MeshInstance from random points, but the algorithm can be used for generating terrain heightmaps, convex hulls, navmeshes, vectorizing bitmaps, caves in a roguelike, etc.
 * Video: https://www.youtube.com/watch?v=bDXLIM_em08
