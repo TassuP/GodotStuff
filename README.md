@@ -14,7 +14,16 @@ A basic 2D Delaunay triangulation demo for Godot. This demo just creates a MeshI
 * Ported from this code: https://gist.github.com/miketucker/3795318
 * More info: https://en.wikipedia.org/wiki/Delaunay_triangulation
 
+<p align="center">
+<img src="/screenshots/delaunay_01.png" alt="Screenshot" width="250px"/>
+<img src="/screenshots/delaunay_02.png" alt="Screenshot" width="250px"/>
+</p>
+
 ## Texture Painter
 This is a small demo showing how to paint textures directly to a 3D-model. Something like Texture Paint mode in Blender.
 * Video: https://www.youtube.com/watch?v=BwI1kXFER98
 * Video v2: https://www.youtube.com/watch?v=VVXb1QbjqYU
+
+<p align="center">
+<img src="/screenshots/texturepainter_01.png" alt="Screenshot" width="500px"/>
+</p>
