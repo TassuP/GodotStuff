@@ -4,7 +4,7 @@
 [ext_resource path="res://icon.png" type="Texture" id=2]
 [ext_resource path="res://Delaunay.gd" type="Script" id=3]
 
-[sub_resource type="Environment" id=2]
+[sub_resource type="Environment" id=1]
 
 ambient_light/enabled = false
 ambient_light/color = Color( 0, 0, 0, 1 )
@@ -48,7 +48,7 @@ bcs/contrast = 1.0
 bcs/saturation = 1.0
 srgb/enabled = false
 
-[sub_resource type="FixedMaterial" id=1]
+[sub_resource type="FixedMaterial" id=2]
 
 flags/visible = true
 flags/double_sided = false
@@ -118,7 +118,7 @@ far = 200.0
 keep_aspect = 1
 current = true
 visible_layers = 1048575
-environment = SubResource( 2 )
+environment = SubResource( 1 )
 h_offset = 0.0
 v_offset = 0.0
 
@@ -154,7 +154,7 @@ script/script = ExtResource( 1 )
 _import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 layers = 1
 geometry/visible = true
-geometry/material_override = SubResource( 1 )
+geometry/material_override = SubResource( 2 )
 geometry/cast_shadow = 1
 geometry/receive_shadows = true
 geometry/range_begin = 0.0
