@@ -6,7 +6,12 @@
 #include "reference.h"
 
 class Simplex : public Reference {
-    GDCLASS(Simplex,Reference);
+
+	// For Godot 2.x
+	OBJ_TYPE(Simplex,Reference);
+
+	// For Godot 3.0
+	//GDCLASS(Simplex,Reference);
 
 
 	const static float F2 = 0.36602540378443860;

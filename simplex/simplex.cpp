@@ -4,8 +4,12 @@
 
 void Simplex::_bind_methods() {
 
-    ClassDB::bind_method("simplex2",&Simplex::simplex2);
-    //ClassDB::bind_method("simplex3",&Simplex::simplex3);
+	// For Godot 2.x
+	ObjectTypeDB::bind_method("simplex2",&Simplex::simplex2);
+
+	// For Godot 3.0
+	//ClassDB::bind_method("simplex2",&Simplex::simplex2);
+	//ClassDB::bind_method("simplex3",&Simplex::simplex3);
 }
 
 Simplex::Simplex() {
