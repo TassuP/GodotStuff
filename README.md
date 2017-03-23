@@ -3,7 +3,7 @@
 This repository is for some little things I've made with [Godot engine](https://godotengine.org). Everything here is released under MIT-license, so you can use them in any way you like. No need to give me credit.
 
 ## Simplex noise module
-A custom c++ module for a Simplex noise function. This only works for Godot 3.0, but can be used with 2.x with very small changes. Only 2D-version for now, since that's apparently not protected by patents. This module reduces 91% of the computing time compared to GDScript implementation.
+A custom c++ module for a Simplex noise function. This only works for Godot 2.x, but can be used with 3.0 with very small changes (instructions in the comments). Only 2D-version for now, since that's apparently not protected by patents. This module reduces 91% of the computing time compared to GDScript implementation.
 * Original GDScript version by OvermindDL1: https://github.com/OvermindDL1/Godot-Helpers/tree/master/Simplex
 * More info: https://en.wikipedia.org/wiki/Simplex_noise
 * How to use custom modules: http://docs.godotengine.org/en/stable/reference/custom_modules_in_c++.html
