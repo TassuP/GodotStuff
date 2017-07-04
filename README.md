@@ -2,6 +2,17 @@
 
 This repository is for some little things I've made with [Godot engine](https://godotengine.org). Everything here is released under MIT-license, so you can use them in any way you like. No need to give me credit.
 
+## Sky shader demo
+A procedural sky shader for Godot 2.1.x, similar to the procedural sky in Godot 3.0. The demo has three examples skies. The shader draws a sky gradient and the sun, while a gdscript updates a directional light source, shadows, fog and ambient light.
+
+<p align="center">
+<img src="/screenshots/skyshader_1.png" alt="Screenshot" width="250px"/>
+<img src="/screenshots/skyshader_2.png" alt="Screenshot" width="250px"/>
+<img src="/screenshots/skyshader_3.png" alt="Screenshot" width="250px"/>
+<img src="/screenshots/skyshader_4.png" alt="Screenshot" width="250px"/>
+<img src="/screenshots/skyshader_5.png" alt="Screenshot" width="250px"/>
+</p>
+
 ## Simplex noise module
 A custom c++ module for a Simplex noise function. This only works for Godot 2.x, but can be used with 3.0 with very small changes (instructions in the comments). Only 2D-version for now, since that's apparently not protected by patents. This module reduces 91% of the computing time compared to GDScript implementation.
 * Original GDScript version by OvermindDL1: https://github.com/OvermindDL1/Godot-Helpers/tree/master/Simplex
